@@ -1,7 +1,344 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: home
-author_profile: true
+layout: none
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>From Field to Function | Dinu Jayasuriya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --abyss:    #060e1a;
+      --deep:     #0a1628;
+      --navy:     #0f2044;
+      --ocean:    #1a3a6e;
+      --teal:     #0d7a7a;
+      --aqua:     #1ab8b8;
+      --coral:    #ff6b5b;
+      --peach:    #ffab9a;
+      --foam:     #e8f4f4;
+      --white:    #f0f6f6;
+      --muted:    #7a9aaa;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--abyss); color: var(--white); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(6,14,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,184,184,0.1);
+    }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 1.2rem; text-decoration: none; }
+    .nav-brand span { color: var(--aqua); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--aqua); }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 15% 60%, rgba(13,122,122,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 30%, rgba(255,107,91,0.1) 0%, transparent 50%),
+        linear-gradient(180deg, var(--abyss) 0%, var(--deep) 50%, #051018 100%);
+      display: flex; align-items: center;
+      padding: 6rem 3rem 4rem; position: relative; overflow: hidden;
+    }
+
+    .wave { position: absolute; bottom: 0; left: 0; right: 0; height: 180px; overflow: hidden; }
+    .wave svg { width: 200%; animation: wave-move 9s linear infinite; }
+    .wave1 { opacity: 0.07; }
+    .wave2 { opacity: 0.04; bottom: -20px; }
+    .wave2 svg { animation: wave-move 13s linear infinite reverse; }
+    @keyframes wave-move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .particle { position: absolute; border-radius: 50%; background: var(--aqua); opacity: 0; animation: float-up linear infinite; }
+    @keyframes float-up {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.15; }
+      90%  { opacity: 0.05; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    .hero-content { max-width: 680px; position: relative; z-index: 2; }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--aqua); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; animation: fadeUp 0.8s ease both; }
+    .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--aqua); }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5.5vw, 5rem); color: var(--white); line-height: 1.05; margin-bottom: 0.3rem; animation: fadeUp 0.8s 0.15s ease both; }
+    .hero h1 em { color: var(--aqua); font-style: italic; }
+    .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--coral); margin-bottom: 1.8rem; animation: fadeUp 0.8s 0.25s ease both; }
+    .hero-desc { font-size: 1rem; color: rgba(240,246,246,0.65); line-height: 1.85; max-width: 540px; margin-bottom: 2.5rem; animation: fadeUp 0.8s 0.35s ease both; }
+    .hero-desc strong { color: var(--aqua); font-weight: 500; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; animation: fadeUp 0.8s 0.45s ease both; }
+    .tag { padding: 0.35rem 0.9rem; border: 1px solid rgba(26,184,184,0.3); color: var(--aqua); font-size: 0.78rem; letter-spacing: 0.06em; border-radius: 2rem; background: rgba(26,184,184,0.07); }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s 0.55s ease both; }
+
+    .btn { padding: 0.8rem 2rem; border-radius: 3rem; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; font-weight: 700; }
+    .btn-primary { background: var(--coral); color: white; }
+    .btn-primary:hover { background: #ff8070; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,91,0.35); }
+    .btn-outline { border: 1.5px solid rgba(26,184,184,0.4); color: var(--aqua); }
+    .btn-outline:hover { border-color: var(--aqua); background: rgba(26,184,184,0.08); transform: translateY(-2px); }
+
+    .hero-visual { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; gap: 1rem; animation: fadeIn 1.2s 0.6s ease both; }
+    .stat-card { background: rgba(26,184,184,0.06); border: 1px solid rgba(26,184,184,0.15); backdrop-filter: blur(16px); padding: 1.2rem 1.6rem; border-radius: 16px; min-width: 180px; text-align: center; }
+    .stat-card .num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--aqua); display: block; }
+    .stat-card .lbl { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .pipeline { background: var(--navy); border-top: 1px solid rgba(26,184,184,0.15); border-bottom: 1px solid rgba(26,184,184,0.15); padding: 1.8rem 3rem; display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+    .pipeline-step { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 1.2rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pipeline-step strong { color: var(--aqua); }
+    .arrow { color: var(--teal); font-size: 1rem; opacity: 0.6; }
+
+    section { padding: 6rem 3rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+    .section-label::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--teal); }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+
+    .about { background: var(--deep); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-text p { font-size: 1rem; line-height: 1.9; color: rgba(240,246,246,0.65); margin-bottom: 1.2rem; }
+    .about-text p strong { color: var(--white); font-weight: 500; }
+    .about-image-frame { width: 100%; padding-top: 115%; background: linear-gradient(135deg, var(--teal), var(--ocean)); border-radius: 40px 4px 40px 4px; position: relative; overflow: hidden; box-shadow: -16px 16px 0 rgba(26,184,184,0.12); }
+    .about-image-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .about-image-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(240,246,246,0.4); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; gap: 0.8rem; text-align: center; padding: 1rem; }
+    .about-image-placeholder span { font-size: 3rem; }
+
+    .research { background: var(--abyss); }
+    .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .research-card { background: rgba(26,184,184,0.04); border: 1px solid rgba(26,184,184,0.12); border-radius: 16px; padding: 2rem 1.8rem; transition: all 0.3s; }
+    .research-card:hover { transform: translateY(-6px); border-color: rgba(26,184,184,0.35); background: rgba(26,184,184,0.08); box-shadow: 0 20px 50px rgba(13,122,122,0.2); }
+    .research-card .eco-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .research-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 0.6rem; }
+    .research-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    .expertise { background: var(--navy); }
+    .expertise-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3rem; }
+    .expertise-col { border-left: 2px solid rgba(26,184,184,0.25); padding-left: 1.5rem; }
+    .expertise-col h3 { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); margin-bottom: 1.2rem; }
+    .expertise-col ul { list-style: none; }
+    .expertise-col li { font-size: 0.9rem; color: rgba(240,246,246,0.6); padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 0.7rem; }
+    .expertise-col li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--aqua); flex-shrink: 0; }
+
+    .blog-preview { background: var(--deep); }
+    .posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-top: 3rem; }
+    .post-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(26,184,184,0.1); border-radius: 16px; overflow: hidden; transition: all 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .post-card:hover { transform: translateY(-5px); border-color: rgba(26,184,184,0.3); box-shadow: 0 20px 50px rgba(13,122,122,0.15); }
+    .post-card-header { height: 5px; background: linear-gradient(90deg, var(--teal), var(--coral)); }
+    .post-card-body { padding: 1.8rem; flex: 1; }
+    .post-card-tag { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--aqua); margin-bottom: 0.8rem; font-weight: 700; }
+    .post-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 0.7rem; line-height: 1.4; }
+    .post-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .post-card-footer { padding: 1rem 1.8rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.78rem; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+    .coming-soon-badge { background: rgba(255,107,91,0.12); color: var(--coral); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 2rem; font-weight: 700; border: 1px solid rgba(255,107,91,0.2); }
+
+    footer { background: var(--abyss); border-top: 1px solid rgba(26,184,184,0.1); padding: 3rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer a { color: var(--aqua); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--coral); }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+
+    @media (max-width: 900px) {
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .expertise-cols { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="particle" style="width:4px;height:4px;left:10%;animation-duration:15s;animation-delay:0s;"></div>
+<div class="particle" style="width:3px;height:3px;left:25%;animation-duration:18s;animation-delay:3s;"></div>
+<div class="particle" style="width:5px;height:5px;left:50%;animation-duration:12s;animation-delay:6s;"></div>
+<div class="particle" style="width:3px;height:3px;left:70%;animation-duration:20s;animation-delay:1s;"></div>
+<div class="particle" style="width:4px;height:4px;left:85%;animation-duration:16s;animation-delay:9s;"></div>
+
+<nav>
+  <a href="/" class="nav-brand">From Field to <span>Function</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="/about/">Full Bio</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="wave wave1"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,30 1440,60 L1440,120 L0,120 Z" fill="rgba(26,184,184,1)"/><path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,30 1440,60 L1440,120 L0,120 Z" fill="rgba(26,184,184,1)" transform="translate(720,0)"/></svg></div>
+  <div class="wave wave2"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,40 C480,100 960,0 1440,60 L1440,120 L0,120 Z" fill="rgba(255,107,91,1)"/><path d="M0,40 C480,100 960,0 1440,60 L1440,120 L0,120 Z" fill="rgba(255,107,91,1)" transform="translate(720,0)"/></svg></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">PhD Candidate · Clemson University</div>
+    <h1>Dinu<br/><em>Jayasuriya</em></h1>
+    <p class="hero-subtitle">From Field to Function</p>
+    <p class="hero-desc">Studying <strong>microbial communities</strong> across marine, estuarine, freshwater and wildfire-affected ecosystems — from sample collection in the field, through the wet lab, to <strong>genome-resolved bioinformatics</strong>. The whole pipeline, start to finish.</p>
+    <div class="hero-tags">
+      <span class="tag">Metagenomics</span>
+      <span class="tag">16S · ITS · WGS</span>
+      <span class="tag">MAG Recovery</span>
+      <span class="tag">Wildfire Ecology</span>
+      <span class="tag">Marine Microbiomes</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#about" class="btn btn-primary">About Me</a>
+      <a href="#blog" class="btn btn-outline">Read the Blog</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="stat-card"><span class="num">5+</span><span class="lbl">Ecosystems Studied</span></div>
+    <div class="stat-card"><span class="num">3</span><span class="lbl">Sequencing Approaches</span></div>
+    <div class="stat-card"><span class="num">1</span><span class="lbl">Full Pipeline</span></div>
+  </div>
+</section>
+
+<div class="pipeline">
+  <div class="pipeline-step"><span>🌊</span><strong>Field</strong> Sampling</div>
+  <span class="arrow">→</span>
+  <div class="pipeline-step"><span>🧪</span><strong>Wet Lab</strong> Processing</div>
+  <span class="arrow">→</span>
+  <div class="pipeline-step"><span>🔬</span><strong>DNA/RNA</strong> Extraction</div>
+  <span class="arrow">→</span>
+  <div class="pipeline-step"><span>🧬</span><strong>Sequencing</strong> Library Prep</div>
+  <span class="arrow">→</span>
+  <div class="pipeline-step"><span>💻</span><strong>Bioinformatics</strong> Analysis</div>
+  <span class="arrow">→</span>
+  <div class="pipeline-step"><span>🌍</span><strong>Ecological</strong> Insight</div>
+</div>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">Who I Am</div>
+        <h2>Connecting Ecosystems<br/>to Genomes</h2>
+        <p>I'm a <strong>PhD candidate at Clemson University</strong> studying how microbial communities respond to environmental change — from the open ocean and coastal estuaries to freshwater systems and <strong>wildfire-scorched soils</strong>.</p>
+        <p>What sets my research apart is the full-pipeline approach. I design and execute fieldwork, perform all wet lab processing, and carry out the bioinformatics analysis myself. Every decision — from sample preservation to assembly parameters — is made with the full picture in mind.</p>
+        <p>This blog documents that journey in real time, post by post, protocol by protocol.</p>
+        <div style="display:flex; gap:1rem; margin-top:2rem; flex-wrap:wrap;">
+          <a href="https://github.com/DinuJayasuriya" class="btn btn-primary" style="font-size:0.8rem;">GitHub</a>
+          <a href="#" class="btn btn-outline" style="font-size:0.8rem;">Google Scholar</a>
+          <a href="#" class="btn btn-outline" style="font-size:0.8rem;">LinkedIn</a>
+        </div>
+      </div>
+      <div>
+        <div class="about-image-frame">
+          <div class="about-image-placeholder"><span>🌊</span>Add your photo as<br/>assets/images/bio-photo.jpg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="research" id="research">
+  <div class="container">
+    <div class="section-label">What I Study</div>
+    <h2>Research Focus</h2>
+    <div class="research-grid">
+      <div class="research-card"><div class="eco-icon">🔥</div><h3>Wildfire-Affected Soils</h3><p>Tracking microbial community response and recovery across post-fire chronosequences — who survives, who colonises, and what functions are lost or gained.</p></div>
+      <div class="research-card"><div class="eco-icon">🌊</div><h3>Marine & Estuarine Sediments</h3><p>Genome-resolved metagenomics from coastal systems, linking microbial functional potential to biogeochemical cycling in dynamic tidal environments.</p></div>
+      <div class="research-card"><div class="eco-icon">💧</div><h3>Freshwater Systems</h3><p>Microbial diversity and function in freshwater environments, connecting community structure to water quality and ecosystem health indicators.</p></div>
+      <div class="research-card"><div class="eco-icon">🌱</div><h3>Cross-Ecosystem Comparisons</h3><p>What do microbial communities share across radically different environments? Comparative metagenomics across soil, water and marine systems.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="expertise" id="expertise">
+  <div class="container">
+    <div class="section-label">Skills & Methods</div>
+    <h2>Core Expertise</h2>
+    <div class="expertise-cols">
+      <div class="expertise-col">
+        <h3>🌿 Field Work</h3>
+        <ul>
+          <li>Multi-ecosystem sampling design</li>
+          <li>Sample collection & preservation</li>
+          <li>Environmental data logging</li>
+          <li>Soil, water & sediment cores</li>
+          <li>Field documentation & metadata</li>
+        </ul>
+      </div>
+      <div class="expertise-col">
+        <h3>🧪 Wet Lab</h3>
+        <ul>
+          <li>DNA & RNA extraction</li>
+          <li>PCR & gel electrophoresis</li>
+          <li>Library preparation</li>
+          <li>16S · ITS · WGS sequencing</li>
+          <li>Qubit · Nanodrop · QuantIT</li>
+        </ul>
+      </div>
+      <div class="expertise-col">
+        <h3>💻 Bioinformatics</h3>
+        <ul>
+          <li>QC · Assembly · Binning</li>
+          <li>MAG recovery (MetaBAT2)</li>
+          <li>CheckM quality assessment</li>
+          <li>GTDB-Tk taxonomy</li>
+          <li>QIIME2 · DADA2 · Prokka</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blog-preview" id="blog">
+  <div class="container">
+    <div class="section-label">Latest Writing</div>
+    <h2>From Field to Function — The Series</h2>
+    <div class="posts-grid">
+      <div class="post-card">
+        <div class="post-card-header"></div>
+        <div class="post-card-body">
+          <div class="post-card-tag">Post 1 · Field Work</div>
+          <h3>Where It All Begins: Sampling Across Five Ecosystems</h3>
+          <p>From wildfire-scarred hillsides to estuarine mudflats — why we collected these samples and how field decisions shape everything downstream.</p>
+        </div>
+        <div class="post-card-footer"><span>Coming soon</span><span class="coming-soon-badge">Field</span></div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-header"></div>
+        <div class="post-card-body">
+          <div class="post-card-tag">Post 2 · Wet Lab</div>
+          <h3>DNA Extraction from Difficult Samples: Soil, Sediment & Water</h3>
+          <p>Why extraction from environmental samples is harder than it looks, and how inhibitors, low yield and matrix effects are tackled in practice.</p>
+        </div>
+        <div class="post-card-footer"><span>Coming soon</span><span class="coming-soon-badge">Wet Lab</span></div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-header"></div>
+        <div class="post-card-body">
+          <div class="post-card-tag">Post 3 · Bioinformatics</div>
+          <h3>Raw Data Is Never Ready: My QC Process for Metagenomic Reads</h3>
+          <p>FastQC, MultiQC, and Trimmomatic — what the numbers mean and what happens if you skip this step.</p>
+        </div>
+        <div class="post-card-footer"><span>Coming soon</span><span class="coming-soon-badge">Bioinformatics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/DinuJayasuriya">GitHub</a>
+    <a href="https://scholar.google.com/citations?hl=en&user=IePuozkAAAAJ">Google Scholar</a>
+    <a href="https://www.linkedin.com/in/dinu-jayasuriya-964a481a6/">LinkedIn</a>
+    <a href="/about/">About</a>
+  </div>
+  <p>Dinu Jayasuriya · PhD Candidate · Clemson University<br/>
+  <span style="font-size:0.78rem; opacity:0.5;">From Field to Function · dinujayasuriya.github.io</span></p>
+</footer>
+
+</body>
+</html>
