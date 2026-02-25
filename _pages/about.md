@@ -42,7 +42,7 @@ Quality control, metagenomic assembly, binning, MAG quality assessment (CheckM),
 
 ## 📖 This Blog
 
-*From Boots to Function* is a record of my research journey — written for anyone who wants to understand not just *how* to run a bioinformatics pipeline, but *why* the decisions made in the field and the wet lab matter for everything that comes after.
+*From Field to Function* is a record of my research journey — written for anyone who wants to understand not just *how* to run a bioinformatics pipeline, but *why* the decisions made in the field and the wet lab matter for everything that comes after.
 
 I post weekly, following my actual research workflow from sample collection through to final analysis. Each post includes real data, real commands, and real mistakes.
 
