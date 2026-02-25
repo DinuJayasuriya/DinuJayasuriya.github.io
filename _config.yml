@@ -1,12 +1,17 @@
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+minimal_mistakes_skin: default
 
 title: "From Field to Function"
 subtitle: "A Full Metagenomics Journey"
 description: "Connecting field work, wet lab and bioinformatics — from sample collection to genome annotation"
 url: "https://dinujayasuriya.github.io"
 
+search: true
+markdown: kramdown
+
 author:
   name: "Dinu Jayasuriya"
+  avatar: "/assets/images/bio-photo.jpg"
   bio: "Microbial ecologist | Metagenomics | 16S · ITS · WGS | From field to bioinformatics"
   location: "Your Location"
   links:
@@ -14,8 +19,15 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/DinuJayasuriya"
 
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/DinuJayasuriya"
+
 permalink: /:categories/:title/
 paginate: 5
+paginate_path: /page:num/
 
 include:
   - _pages
@@ -30,8 +42,23 @@ defaults:
       read_time: true
       share: true
       related: true
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
 
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gzip
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
